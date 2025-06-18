@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "a3915edc-cac9-49ec-8c38-49ea7c03bc31",
+		"name": "Momo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39762990"
+	},
+	"item": [
+		{
+			"name": "External",
+			"item": [
+				{
+					"name": "Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"// Extract the token; change 'access_token' to the correct field if necessary\r",
+									"let accessToken = jsonData.access_token;\r",
+									"\r",
+									"// Set the token as a global variable\r",
+									"pm.globals.set(\"access_token\", accessToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "App_ID",
+								"value": "{{AppId}}"
+							},
+							{
+								"key": "App_Key",
+								"value": "{{AppKey}}"
+							},
+							{
+								"key": "Resource",
+								"value": "{{Resource}}"
+							},
+							{
+								"key": "apiVersion",
+								"value": "1"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/enterprise.operations.authorization?Identity=ADB2C",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"enterprise.operations.authorization"
+							],
+							"query": [
+								{
+									"key": "Identity",
+									"value": "ADB2C"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "apiVersion",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "country",
+								"value": "vn",
+								"type": "text"
+							},
+							{
+								"key": "language",
+								"value": "en-VN",
+								"type": "text"
+							},
+							{
+								"key": "partner",
+								"value": "MoMo",
+								"type": "text"
+							},
+							{
+								"key": "product",
+								"value": "cir001",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/digital.sales.momo/sales/policies/{{vendorSubmisisonId}}/documents",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"digital.sales.momo",
+								"sales",
+								"policies",
+								"{{vendorSubmisisonId}}",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submission",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "apiVersion",
+								"value": "1",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/pgp-encrypted",
+								"type": "text"
+							},
+							{
+								"key": "country",
+								"value": "vn",
+								"type": "text"
+							},
+							{
+								"key": "language",
+								"value": "en-VN",
+								"type": "text"
+							},
+							{
+								"key": "partner",
+								"value": "momo",
+								"type": "text"
+							},
+							{
+								"key": "product",
+								"value": "cir001",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "-----BEGIN PGP MESSAGE-----\nVersion: BCPG C# v1.8.5.0\n\n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\npL3ygAwwaePBgBTqgSh9y1OmeLpY60Biug==\n=1HzX\n-----END PGP MESSAGE-----",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/digital.sales.momo/sales/submission",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"digital.sales.momo",
+								"sales",
+								"submission"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
